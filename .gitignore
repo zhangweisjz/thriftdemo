@@ -10,3 +10,4 @@ target/
 *.pyc
 .pyc
 .idea/
+*.iml
