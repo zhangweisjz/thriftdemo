@@ -1,0 +1,12 @@
+/pictures/**
+/logs/*
+**/.DS_Store
+.classpath
+.project
+.settings
+target/
+**/*.pyc
+.pydevproject
+*.pyc
+.pyc
+.idea/
