@@ -25,8 +25,7 @@ public class DllCaptchaClient {
             String line = br.readLine();
             transport.open();
             TProtocol protocal = new TCompactProtocol(transport);
-            TMultiplexedProtocol mp =new TMultiplexedProtocol(protocal, "Hello");
-            DemoCaptcha.Client client = new DemoCaptcha.Client(mp);
+            DemoCaptcha.Client client = new DemoCaptcha.Client(protocal);
             System.out.println(client.getDllCaptcha(line.trim()));
 
         } catch (TTransportException e) {
@@ -35,6 +34,8 @@ public class DllCaptchaClient {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally{
+            transport.close();
         }
 
     }
