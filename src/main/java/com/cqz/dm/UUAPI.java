@@ -26,7 +26,7 @@ public class UUAPI {
 
 	public static String	USERNAME	= "zhangweisjz";			//UU用户名
 	public static String	PASSWORD	= "sai123456";						//UU密码
-	public static String	DLLPATH		= "lib\\UUWiseHelper_x64";					//DLL
+	public static String	DLLPATH		= "lib\\UUWiseHelper";					//DLL
 	//public static String	IMGPATH		= "img\\test.png";
 	public static int		SOFTID		= 109966;									//软件ID 获取方式：http://dll.uuwise.com/index.php?n=ApiDoc.GetSoftIDandKEY
 	public static String	SOFTKEY		= "4c1e6682a3c647018e96918aedce1ba6";	//软件KEY 获取方式：http://dll.uuwise.com/index.php?n=ApiDoc.GetSoftIDandKEY
