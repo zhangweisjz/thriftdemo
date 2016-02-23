@@ -10,7 +10,7 @@ import java.io.IOException;
 
 
 public class ImgRecTianyiTest {
-    public static String DLLPATH = "lib\\CaptchaOCR";   //DLL Â·¾¶
+    public static String DLLPATH = "lib\\CaptchaOCR";   //DLL è·¯å¾„
     public static int netIndex = 0;
 
     static {
@@ -45,7 +45,7 @@ public class ImgRecTianyiTest {
                 && (numRead = fi.read(buffer, offset, buffer.length - offset)) >= 0) {
             offset += numRead;
         }
-        // È·±£ËùÓĞÊı¾İ¾ù±»¶ÁÈ¡
+        // ç¡®ä¿æ‰€æœ‰æ•°æ®å‡è¢«è¯»å–
         if (offset != buffer.length) {
             throw new IOException("Could not completely read file "
                     + file.getName());
@@ -55,7 +55,7 @@ public class ImgRecTianyiTest {
     }
 
     public static void main(String[] args) throws IOException {
-        //ÕâÀïÊÇÓÃµÄ±¾µØÍ¼Æ¬¶ÁÈ¡µÄ Ò²¿ÉÒÔÓÃÍøÂç¶ÁÈ¡µÄÍ¼Æ¬ Ö»Òª°ÑÍ¼Æ¬ÀàĞÍ×ª»»³É byte[]
+        //è¿™é‡Œæ˜¯ç”¨çš„æœ¬åœ°å›¾ç‰‡è¯»å–çš„ ä¹Ÿå¯ä»¥ç”¨ç½‘ç»œè¯»å–çš„å›¾ç‰‡ åªè¦æŠŠå›¾ç‰‡ç±»å‹è½¬æ¢æˆ byte[]
         byte[] bs = getContent("C:\\temp\\pic\\temp.jpg");
         getCode(bs);
     }
@@ -71,7 +71,7 @@ public class ImgRecTianyiTest {
         if (result) {
             long end = System.currentTimeMillis();
             rtnCode = new String(code);
-            System.out.println("Ê¶±ğÊ±¼ä£º" + (end - begin) + "ms Ê¶±ğ½á¹û:" + rtnCode);
+            System.out.println("è¯†åˆ«æ—¶é—´ï¼š" + (end - begin) + "ms è¯†åˆ«ç»“æœ:" + rtnCode);
         }
         return rtnCode;
     }
