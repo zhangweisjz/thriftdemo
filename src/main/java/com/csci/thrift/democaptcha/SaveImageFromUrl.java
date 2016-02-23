@@ -39,7 +39,7 @@ public class SaveImageFromUrl {
 
     public static String saveImage(String imageUrl) throws IOException {
         long currentMilliSecond = Instant.now().toEpochMilli();
-        String destinationFile = "C:\\temp\\captcha\\"+currentMilliSecond+".jpg";
+        String destinationFile = "D:\\temp\\captcha\\"+currentMilliSecond+".jpg";
 
         URL url = new URL(imageUrl);
         InputStream is = url.openStream();

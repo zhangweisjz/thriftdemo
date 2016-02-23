@@ -1,6 +1,6 @@
 package com.cqz.dm;
 
-import com.sun.jna.Library;
+import com.csci.thrift.democaptcha.DemoCaptcha;
 import com.sun.jna.Native;
 import com.sun.jna.win32.StdCallLibrary;
 
@@ -30,16 +30,8 @@ public class ImgRecTianyiTest {
         boolean GetVcode(int index, byte[] img, int len, byte[] code);
     }
 
-//    public interface JPYZM extends Library {
-//        JPYZM INSTANCE = (JPYZM) Native.loadLibrary(DLLPATH, JPYZM.class);
-//
-//        int VcodeInit(String pwd);
-//
-//        boolean GetVcode(int index, byte[] img, int len, byte[] code);
-//    }
-
-    public static byte[] getContent(String filePath) throws IOException {
-        File file = new File(filePath);
+    public static byte[] getContent(String picPath) throws IOException {
+        File file = UUAPI.openImgFile(picPath);
         long fileSize = file.length();
         if (fileSize > Integer.MAX_VALUE) {
             System.out.println("file too big...");
@@ -64,12 +56,8 @@ public class ImgRecTianyiTest {
 
     public static void main(String[] args) throws IOException {
         //这里是用的本地图片读取的 也可以用网络读取的图片 只要把图片类型转换成 byte[]
-//        byte[] bs = getContent("img\\temp.jpg");
         byte[] bs = getContent("C:\\temp\\pic\\temp.jpg");
         getCode(bs);
-//		String s="222";
-//		test(s);
-//		System.out.println(s);
     }
 
     public static String getCode(byte[] imgbs) throws IOException {
