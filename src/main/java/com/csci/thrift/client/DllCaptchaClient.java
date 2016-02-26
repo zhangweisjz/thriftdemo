@@ -18,7 +18,8 @@ import java.io.InputStreamReader;
  */
 public class DllCaptchaClient {
     public static void main(String[] args) {
-        TTransport transport = new TSocket("127.0.0.1", 9988);
+//        TTransport transport = new TSocket("127.0.0.1", 9988);
+        TTransport transport = new TSocket("192.168.136.22", 9988);
         try {
             System.out.println("Please input file name:");
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
