@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +26,7 @@ public class UUAPI {
     public static String DLLVerifyKey = "3F0CC8F8-5413-4A33-810A-9902CF778BEF";    //校验API文件是否被篡改，实际上此值不参与传输，关系软件安全，高手请实现复杂的方法来隐藏此值，防止反编译,获取方式也是在后台获取软件ID和KEY一个地方
     public static boolean checkStatus = false;
 
+    public static boolean alreadySet = false;
 
     public interface UUDLL extends Library        //载入优优云的静态库
     {
@@ -85,6 +87,51 @@ public class UUAPI {
         String rs[] = {String.valueOf(codeID), checkResult(resultResult, codeID)};
         return rs;
     }
+
+
+    public static boolean setup() {
+        boolean status = false;    //校验API，必须调用一次，校验失败，打码不成功
+        if(!alreadySet){
+            UUAPI.SOFTID = 109966;
+            UUAPI.SOFTKEY = "4c1e6682a3c647018e96918aedce1ba6";    //KEY 获取方式：http://dll.uuwise.com/index.php?n=ApiDoc.GetSoftIDandKEY
+            UUAPI.DLLVerifyKey = "3F0CC8F8-5413-4A33-810A-9902CF778BEF";//校验API文件是否被篡改，实际上此值不参与传输，关系软件安全，高手请实现复杂的方法来隐藏此值，防止反编译,获取方式也是在后台获取软件ID和KEY一个地方
+
+            UUAPI.USERNAME = "zhangweisjz";        //用户帐号和密码(非开发者帐号)，在打码之前，需要先设置好，给用户留一个输入帐号和密码的地方
+            UUAPI.PASSWORD = "sai123456";
+
+
+            try {
+                status = UUAPI.checkAPI();
+                alreadySet =true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return status;
+    }
+
+    public static String[] uuDecaptcha(ByteBuffer bf, int codeType) throws IOException, URISyntaxException {
+        if (!checkStatus) {
+            String rs[] = {"-19004", "API校验失败,或未校验"};
+            return rs;
+        }
+        byte[] by = bf.array();
+        byte[] resultBtye = new byte[100];        //为识别结果申请内存空间
+        int codeID = UUDLL.INSTANCE.uu_easyRecognizeBytesA(SOFTID, SOFTKEY, USERNAME, PASSWORD, by, by.length, codeType, resultBtye);
+        String resultResult = null;
+        try {
+            resultResult = new String(resultBtye, "GB2312");//如果是乱码，这改成UTF-8试试
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        resultResult = resultResult.trim();
+
+        //下面这两条是为了防止被破解
+
+        String rs[] = {String.valueOf(codeID), checkResult(resultResult, codeID)};
+        return rs;
+    }
+
 
     public static File openImgFile(String picPath) throws IOException {
         File f;
