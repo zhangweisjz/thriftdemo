@@ -102,7 +102,7 @@ public class CaptchaImpl implements DemoCaptcha.Iface {
                 if (!tested) {
                     boolean status = UUAPI.setup(); //校验API，必须调用一次，校验失败，打码不成功
                     if (!status) {
-                        System.out.print("API文件校验失败，无法使用打码服务");
+                        System .out.print("API文件校验失败，无法使用打码服务");
                         return error;
                     } else {
                         tested = true;

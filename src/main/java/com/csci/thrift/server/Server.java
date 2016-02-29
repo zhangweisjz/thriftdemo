@@ -29,13 +29,13 @@ public class Server {
             // 关联处理器与 Hello 服务的实现
             TProcessor processor = new DemoCaptcha.Processor(new CaptchaImpl());
             TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverSocket).protocolFactory(protocalFactory).processor(processor));
-
+            System.out.println("Server started on port " + PORT + "...");
 
             new Thread(() -> {
                 //这个方法会阻塞线程
                 server.serve();
             }).start();
-            System.out.println("Server started on port " + PORT + "...");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
