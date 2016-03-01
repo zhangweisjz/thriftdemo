@@ -55,6 +55,10 @@ public class CaptchaImpl implements DemoCaptcha.Iface {
                 e.printStackTrace();
             }
         }
+        if(result.equals("")){
+            System.out.println("Decaptcha failure...");
+        }
+
         return result;
     }
 
